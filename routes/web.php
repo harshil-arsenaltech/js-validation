@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserDocumentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,7 @@ Route::get('/', function () {
 
 Route::resource('blog', BlogController::class);
 Route::resource('faq', FaqController::class);
+Route::resource('document', UserDocumentController::class);
 Route::get('findNearestLocationInKM', [BlogController::class, 'findNearestLocationInKM']);
 Route::get('findLocationWithNew', [BlogController::class, 'findLocationWithNew']);
 Route::get('getIdelTrips', [BlogController::class, 'getIdelTrips']);
