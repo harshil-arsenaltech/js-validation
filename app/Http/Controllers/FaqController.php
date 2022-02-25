@@ -6,6 +6,7 @@ use App\Http\Requests\StoreFaqRequest;
 use App\Models\Faq;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 
 class FaqController extends Controller
 {
@@ -20,6 +21,12 @@ class FaqController extends Controller
             $data = Faq::select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->editColumn('answer', function ($row) {
+                    return Str::limit($row->answer, 50, ' ...');
+                })
+                ->editColumn('question', function ($row) {
+                    return Str::limit($row->question, 50, ' ...');
+                })
                 ->addColumn('action', function ($row) {
                     $action = '<a class="btn btn-primary text-light edit-modal" data-url="' . asset("faq/{$row->id}") . '" data-toggle="modal" data-target="#faqModal" title="Create a project"><i class="fas fa-edit"></i></a> ';
                     $action .= '<a class="btn btn-danger text-light delete-modal" data-url="' . asset("faq/{$row->id}") . '" data-toggle="modal" data-target="#faqDeleteModal"> '. $row->id .'<i class="fas fa-delete"></i></a>';
