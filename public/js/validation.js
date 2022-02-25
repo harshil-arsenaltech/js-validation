@@ -86,7 +86,7 @@ $(document).ready(function () {
                 data: form_field,
                 success: function (res) {
                     $('.alert.alert-success').html(res.message).show();
-                    // $('.modal-close-btn').closest('form').find('[validate]').removeClass('is-invalid').val('');           
+                    // $('.modal-close-btn').closest('form').find('[validate]').removeClass('is-invalid').val('');
                     // $('.modal-close-btn').closest('form').find('input:not([name=_token])').removeClass('is-invalid').val('');
                     removeClassAndSetValueEmpty($('.modal-close-btn').closest('form'));
                     $('.modal-close-btn').closest('.modal').trigger('click');
@@ -154,5 +154,42 @@ $(document).ready(function () {
 
     function removeClassAndSetValueEmpty(form_obj) {
         form_obj.find('input:not([name=_token])').removeClass('is-invalid').val('');
+    }
+
+    $(document).on('click', '.delete-modal', function (e) {
+        e.preventDefault();
+        var url = $(this).data('url');
+        $('#delete-btn').removeAttr('data-url');
+        $('#delete-btn').attr('data-url', url);
+    });
+
+    $(document).on('click', '#delete-btn', function (e) {
+        e.preventDefault();
+
+        var delete_url = $('#delete-btn').attr('data-url');
+
+        if (delete_url != '' && delete_url != undefined) {
+            setCsrfToken();
+            $.ajax({
+                url: delete_url,
+                method: 'delete',
+                success: function (res) {
+                    $('.modal-close-btn').closest('.modal').trigger('click');
+                    $('.alert.alert-success').html(res.message).show();
+                    table.ajax.reload();
+                },
+                error: function (err) {
+                    console.log('err', err);
+                },
+            });
+        }
+    });
+
+    function setCsrfToken() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     }
 });
