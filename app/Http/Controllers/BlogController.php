@@ -191,4 +191,12 @@ class BlogController extends Controller
             'data'  => [],
         ];
     }
+
+    public function tripCompleted(Request $request) {
+        Trip::where('trip_id', $request->trip_id)->update([
+            'trip_status_id' => 2,
+            'end_trip_time' => Carbon::now(),
+        ]);
+        return ['message' => 'success'];
+    }
 }
