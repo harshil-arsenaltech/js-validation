@@ -29,7 +29,7 @@ class FaqController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $action = '<a class="btn btn-primary text-light edit-modal" data-url="' . asset("faq/{$row->id}") . '" data-toggle="modal" data-target="#faqModal" title="Create a project"><i class="fas fa-edit"></i></a> ';
-                    $action .= '<a class="btn btn-danger text-light delete-modal" data-url="' . asset("faq/{$row->id}") . '" data-toggle="modal" data-target="#faqDeleteModal"> '. $row->id .'<i class="fas fa-delete"></i></a>';
+                    $action .= '<a class="btn btn-danger text-light delete-modal" data-url="' . asset("faq/{$row->id}") . '" data-toggle="modal" data-target="#faqDeleteModal"><i class="fas fa-delete"></i></a>';
                     return $action;
                 })
                 ->rawColumns(['action'])
