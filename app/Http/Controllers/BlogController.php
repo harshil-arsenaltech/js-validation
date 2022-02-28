@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
+use App\Models\Setting;
 use App\Models\Trip;
 use App\Models\TripGroup;
 use App\Models\UserLocation;
@@ -66,7 +67,6 @@ class BlogController extends Controller
             $data
         );
         return response()->json(['message' => 'Blog saved successfully.']);
-        // return back()->with('success', 'Blog saved successfully.');
     }
 
     /**
@@ -123,6 +123,10 @@ class BlogController extends Controller
         $lat = 23.0112;
         $lon = 72.5631;
 
+        $distance = Setting::where('slug', 'distance')->first();
+
+        $distance = !empty($distance) ? $distance->value : 5;
+
         $location = DB::table('user_locations')
             ->select(
                 'user_locations.id',
@@ -138,7 +142,7 @@ class BlogController extends Controller
                     $lon
                 ))
             )
-            ->having('distance', '<', 7000)
+            ->having('distance', '<', $distance)
             ->orderBy('distance', 'asc')
             ->get();
         // dd($location, empty($location), count($location));
@@ -168,7 +172,9 @@ class BlogController extends Controller
     public function getIdelTrips()
     {
         $message = "No found Trips";
-        $interval = 5;
+        $interval = Setting::where('slug', 'idel_trip_cancel_time')->first();
+
+        $interval = !empty($interval) ? $interval->value : 5;
         $currentTime = Carbon::now()->subMinutes($interval)->toDateTimeString();
         $data = Trip::select('trips.*', 'trip_groups.trip_id')
             ->leftjoin('trip_groups', 'trips.id', 'trip_groups.trip_id')

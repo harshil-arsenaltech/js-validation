@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserDocumentController;
@@ -22,6 +23,7 @@ Route::get('/', function () {
 });
 
 Route::resource('blog', BlogController::class);
+Route::resource('setting', SettingController::class);
 Route::resource('faq', FaqController::class);
 Route::resource('document', UserDocumentController::class);
 Route::get('findNearestLocationInKM', [BlogController::class, 'findNearestLocationInKM']);
