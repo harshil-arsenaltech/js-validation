@@ -205,4 +205,18 @@ class BlogController extends Controller
         ]);
         return ['message' => 'success'];
     }
+
+    public function getTripsForFindDrivers()
+    {
+        // INSERT INTO trip_groups (trip_id) VALUES (4);
+        // update trip_groups set request_status = true where id = 4
+        $data = Trip::select('trips.*', 'trip_groups.trip_id', DB::raw('sum( IF(trip_groups.request_status = 1, trip_groups.request_status, 0)) AS count_trip_group_member'))
+            ->leftjoin('trip_groups', 'trips.id', 'trip_groups.trip_id')
+            ->where('trips.trip_status_id', 1)
+            ->having('count_trip_group_member', '<=', 3)
+            ->groupBy('trips.id')
+            ->get();
+
+        return $data;
+    }
 }

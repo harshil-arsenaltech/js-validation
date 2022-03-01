@@ -29,6 +29,8 @@ Route::resource('document', UserDocumentController::class);
 Route::get('findNearestLocationInKM', [BlogController::class, 'findNearestLocationInKM']);
 Route::get('findLocationWithNew', [BlogController::class, 'findLocationWithNew']);
 Route::get('getIdelTrips', [BlogController::class, 'getIdelTrips']);
+Route::get('getTripsForFindDrivers', [BlogController::class, 'getTripsForFindDrivers']);
+
 
 Route::resource('post', PostController::class);
 

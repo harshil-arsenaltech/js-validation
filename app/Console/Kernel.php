@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('trip:cancel-idel-trips')->everyMinute();
+        $schedule->command('trip:find-drivers-for-trip')->everyMinute();
     }
 
     /**

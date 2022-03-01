@@ -207,4 +207,18 @@ $(document).ready(function () {
             console.log('File has uploaded');
         }
     });
+
+    $(document).on('change', '#filter_select', function (e) {
+        e.preventDefault();
+        var newUrl  = request_url + '?' + jQuery.param(table.ajax.params());
+
+        table.destroy();
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: newUrl,
+            data: data,
+            columns: request_fields
+        });
+    });
 });

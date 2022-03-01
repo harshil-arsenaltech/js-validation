@@ -444,6 +444,12 @@
                 title="Create a project">
                 <i class="fas fa-plus-circle"></i>
             </a>
+            <select name="filter_select" id="filter_select">
+                <option value="">select</option>
+                <option value="1">A</option>
+                <option value="2">B</option>
+                <option value="3">C</option>
+            </select>
         </div>
         <table class="table table-bordered data-table">
             <thead>
@@ -469,6 +475,7 @@
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> --}}
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script>
     var request_url = "blog";
     var request_fields = [{
