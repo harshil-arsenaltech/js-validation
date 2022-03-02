@@ -458,32 +458,7 @@
         </table>
     </div>
 
-    {{-- <div class="container">
-        <div class="alert alert-success text-center mt-2" style="display: none"></div>
-        <div class="pull-left mt-2">
-            <h1>Document</h1>
-        </div>
-        <div class="raw">
-            <form id="fileUploadForm" method="POST" action="{{ asset('document') }}" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group mb-3">
-                    <input name="file" type="file" class="form-control">
-                </div>
-                <div class="d-grid mb-3">
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </div>
-                <div class="form-group">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                            role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                            style="width: 0%"></div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div> --}}
     @include('document.document-modal');
-    {{-- @include('delete-modal'); --}}
 </body>
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" /> --}}
@@ -494,26 +469,7 @@
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> --}}
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script>
-    // $(function() {
-    //     $(document).ready(function() {
-    //         $('#fileUploadForm').ajaxForm({
-    //             beforeSend: function() {
-    //                 var percentage = '0';
-    //             },
-    //             uploadProgress: function(event, position, total, percentComplete) {
-    //                 var percentage = percentComplete;
-    //                 $('.progress .progress-bar').css("width", percentage + '%', function() {
-    //                     return $(this).attr("aria-valuenow", percentage) + "%";
-    //                 })
-    //             },
-    //             complete: function(xhr) {
-    //                 console.log('File has uploaded');
-    //             }
-    //         });
-    //     });
-    // });
     var request_url = "document";
     var request_fields = [{
             data: 'id',

@@ -83,7 +83,10 @@ $(document).ready(function () {
             $.ajax({
                 url: form_url,
                 method: form_method,
-                data: form_field,
+                // data: form_field,
+                data: new FormData(form_obj[0]), // I used for getting other file input data
+                processData: false,
+                contentType: false,
                 success: function (res) {
                     $('.alert.alert-success').html(res.message).show();
                     // $('.modal-close-btn').closest('form').find('[validate]').removeClass('is-invalid').val('');
@@ -192,21 +195,6 @@ $(document).ready(function () {
             }
         });
     }
-
-    $('#document_id').ajaxForm({
-        beforeSend: function () {
-            // var percentage = '0';
-        },
-        uploadProgress: function (event, position, total, percentComplete) {
-            var percentage = percentComplete;
-            $('.progress .progress-bar').css("width", percentage + '%', function () {
-                return $(this).attr("aria-valuenow", percentage) + "%";
-            });
-        },
-        complete: function (xhr) {
-            console.log('File has uploaded');
-        }
-    });
 
     $(document).on('change', '#filter_select', function (e) {
         e.preventDefault();
