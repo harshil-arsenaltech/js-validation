@@ -7,7 +7,10 @@ use App\Models\Blog;
 use App\Models\Setting;
 use App\Models\Trip;
 use App\Models\TripGroup;
+use App\Models\User;
 use App\Models\UserLocation;
+use App\Notifications\TestNotification;
+use Illuminate\Support\Facades\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +40,41 @@ class BlogController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('blog.index');
+        $user = User::find(1);
+        // $user->unreadNotifications->markAsRead();
+        // dd($user->unreadNotifications, $user->unreadNotifications->find('430738a4-4c17-4ef3-be5c-95207dbb84b4'));
+        return view('blog.index', ['notifications' => $user->unreadNotifications]);
+    }
+
+
+    public function testSchenarioCheck()
+    {
+        $adminNotification = ['first driver create', ''];
+        $driverNotification = [
+            'admin verified driver', 'sent trip request to driver', 'Rider accept driver for trip', 'rider reached the starting point', 'rider cancel trip', 'admin cancel trip', 'rider review to driver',
+        ];
+        $riderNotification = [
+            'driver Accept trip request', 'driver reached the starting point', 'admin cancel trip',
+        ];
+    }
+
+    public function testNotification()
+    {
+        $user = User::find(1);
+        // $user->notify(new TestNotification());
+
+        Notification::send($user, new TestNotification($user));
+        // update notifications set notifiable_id = "2" where id = "7277fdd0-8034-4a6e-accc-e8cb42b784fa"
+        dd('TEST', $user);
+    }
+
+    public function readNotification($id, $notifiableId)
+    {
+        User::find($id)
+            ->unreadNotifications
+            ->find($notifiableId)
+            ->markAsRead();
+        return redirect()->back()->with(['alert-success' => 'Notification read it']);
     }
 
     /**

@@ -209,4 +209,9 @@ $(document).ready(function () {
             columns: request_fields
         });
     });
+
+    $(document).on('click', '.redirect-related-page', function (e) {
+        e.preventDefault();
+        window.location.href = $(this).attr('data-url');
+    });
 });

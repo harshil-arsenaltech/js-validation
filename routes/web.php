@@ -30,7 +30,8 @@ Route::get('findNearestLocationInKM', [BlogController::class, 'findNearestLocati
 Route::get('findLocationWithNew', [BlogController::class, 'findLocationWithNew']);
 Route::get('getIdelTrips', [BlogController::class, 'getIdelTrips']);
 Route::get('getTripsForFindDrivers', [BlogController::class, 'getTripsForFindDrivers']);
-
+Route::get('testNotification', [BlogController::class, 'testNotification']);
+Route::get('show/{id}/{notifiable_id}', [BlogController::class, 'readNotification']);
 
 Route::resource('post', PostController::class);
 
